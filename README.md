@@ -1,11 +1,11 @@
-# 🎵 Soundkit Library
+# 🎵 Drum Machine PRO - Soundkit Library
 
-A modular, auto-organizing soundkit library system with automatic detection, grouping, and manifest generation. Perfect for drum machines, samplers, and music production web applications.
+A modular, auto-organizing soundkit library system for the Drum Machine PRO project. Features automatic detection, grouping, and manifest generation. Perfect for drum machines, samplers, and music production web applications.
 
 ## 📁 Repository Structure
 
 ```
-soundkit-library/
+Drum-Machine-PRO/
 ├── samples/              # All sound samples organized by instrument
 │   ├── kick/            # Kick drum samples
 │   ├── snare/           # Snare drum samples
@@ -58,8 +58,8 @@ The system automatically:
 ### 1. Clone and Setup
 
 ```bash
-git clone https://github.com/yourusername/soundkit-library.git
-cd soundkit-library
+git clone https://github.com/casa24records/Drum-Machine-PRO.git
+cd Drum-Machine-PRO
 npm install
 ```
 
@@ -95,7 +95,7 @@ npm run demo
 
 ```javascript
 // Import from GitHub Pages or CDN
-import soundkitManager from 'https://yourusername.github.io/soundkit-library/index.js';
+import soundkitManager from 'https://casa24records.github.io/Drum-Machine-PRO/index.js';
 
 // Get all soundkits
 const allKits = soundkitManager.getAllSoundkits();
@@ -115,7 +115,7 @@ const buffers = await soundkitManager.loadSoundkit(audioContext, kit.id);
 
 ```javascript
 // Fetch the manifest
-const response = await fetch('https://yourusername.github.io/soundkit-library/manifest.json');
+const response = await fetch('https://casa24records.github.io/Drum-Machine-PRO/manifest.json');
 const manifest = await response.json();
 
 // Access soundkits
@@ -124,7 +124,7 @@ manifest.soundkits.forEach(kit => {
     
     // Build sample URLs
     Object.entries(kit.instruments).forEach(([instrument, path]) => {
-        const url = `https://yourusername.github.io/soundkit-library/samples/${path}`;
+        const url = `https://casa24records.github.io/Drum-Machine-PRO/samples/${path}`;
         console.log(`  ${instrument}: ${url}`);
     });
 });
@@ -133,11 +133,11 @@ manifest.soundkits.forEach(kit => {
 ### Method 3: NPM Package
 
 ```bash
-npm install @yourusername/soundkit-library
+npm install @casa24records/drum-machine-pro
 ```
 
 ```javascript
-import soundkitManager from '@yourusername/soundkit-library';
+import soundkitManager from '@casa24records/drum-machine-pro';
 
 // Use the same API as Method 1
 const kits = soundkitManager.getAllSoundkits();
@@ -153,7 +153,7 @@ The generated `manifest.json` contains:
   "generated": "2024-01-15T10:30:00.000Z",
   "totalSoundkits": 5,
   "instruments": ["kick", "snare", "hihat", "clap", "crash", "open", "rim", "bell"],
-  "baseUrl": "https://yourusername.github.io/soundkit-library",
+  "baseUrl": "https://casa24records.github.io/Drum-Machine-PRO",
   "soundkits": [
     {
       "name": "Batman Begins",
@@ -220,7 +220,7 @@ class DrumMachine {
     }
 
     async loadKit(soundkitId) {
-        const manager = await import('https://yourusername.github.io/soundkit-library/index.js');
+        const manager = await import('https://casa24records.github.io/Drum-Machine-PRO/index.js');
         this.buffers = await manager.default.loadSoundkit(this.audioContext, soundkitId);
     }
 
@@ -286,7 +286,7 @@ location /samples/ {
 The library can be distributed via:
 1. **GitHub Pages** (recommended) - Automatic with included workflow
 2. **NPM** - Publish as a package
-3. **CDN** - Use jsDelivr with GitHub: `https://cdn.jsdelivr.net/gh/user/repo@latest/`
+3. **CDN** - Use jsDelivr with GitHub: `https://cdn.jsdelivr.net/gh/casa24records/Drum-Machine-PRO@latest/`
 4. **Self-hosted** - Deploy to your own server
 
 ## 🤝 Contributing
@@ -302,9 +302,9 @@ MIT License - See LICENSE file for details
 
 ## 🙋 Support
 
-- Issues: [GitHub Issues](https://github.com/yourusername/soundkit-library/issues)
-- Discussions: [GitHub Discussions](https://github.com/yourusername/soundkit-library/discussions)
+- Issues: [GitHub Issues](https://github.com/casa24records/Drum-Machine-PRO/issues)
+- Discussions: [GitHub Discussions](https://github.com/casa24records/Drum-Machine-PRO/discussions)
 
 ---
 
-Made with ❤️ for music producers and web developers
+Made with ❤️ for music producers and web developers by Casa24 Records
