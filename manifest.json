@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-07T22:49:43.938Z",
+  "generated": "2025-08-07T22:50:48.942Z",
   "totalSoundkits": 1,
   "instruments": [
     "kick",
@@ -22,31 +22,33 @@
         "hihat": "hihat/firealarm - hihat.wav",
         "clap": "clap/firealarm - clap.wav",
         "crash": "crash/firealarm - crash.wav",
+        "open": "open/firealarm - open.wav",
         "bell": "bell/firealarm - bell.wav"
       },
-      "completeness": 62.5,
+      "completeness": 75,
       "availableInstruments": [
         "bell",
         "clap",
         "crash",
         "hihat",
-        "kick"
+        "kick",
+        "open"
       ]
     }
   ],
   "statistics": {
-    "totalFiles": 5,
+    "totalFiles": 6,
     "instrumentCoverage": {
       "kick": 1,
       "snare": 0,
       "hihat": 1,
       "clap": 1,
       "crash": 1,
-      "open": 0,
+      "open": 1,
       "rim": 0,
       "bell": 1
     },
     "completeSoundkits": 0,
-    "averageCompleteness": 62.5
+    "averageCompleteness": 75
   }
 }
