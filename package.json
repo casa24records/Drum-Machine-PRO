@@ -32,7 +32,7 @@
     "web-audio-api",
     "music-production"
   ],
-  "author": "Your Name",
+  "author": "Casa24 Records",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.0",
