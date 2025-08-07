@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-07T22:53:03.292Z",
+  "generated": "2025-08-07T22:59:23.629Z",
   "totalSoundkits": 1,
   "instruments": [
     "kick",
@@ -12,7 +12,7 @@
     "rim",
     "bell"
   ],
-  "baseUrl": null,
+  "baseUrl": "https://casa24records.github.io/Drum-Machine-PRO",
   "soundkits": [
     {
       "name": "firealarm",
