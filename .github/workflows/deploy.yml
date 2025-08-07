@@ -1,0 +1,70 @@
+# .github/workflows/deploy.yml
+name: Generate Manifest and Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'samples/**/*.wav'
+      - 'scripts/generate-manifest.js'
+      - 'index.js'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate manifest
+        run: npm run generate
+        env:
+          GITHUB_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+
+      - name: Commit manifest if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add manifest.json
+          git diff --staged --quiet || git commit -m "Auto-generate manifest.json [skip ci]"
+          git push
+
+      - name: Setup Pages
+        if: github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v3
+
+      - name: Build demo site
+        run: |
+          mkdir -p _site
+          cp -r samples _site/
+          cp manifest.json _site/
+          cp index.js _site/
+          cp demos/index.html _site/
+          echo "Soundkit Library" > _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
