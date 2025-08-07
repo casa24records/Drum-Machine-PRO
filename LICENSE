@@ -1,16 +1,62 @@
-MIT License
+MIT License - Modified for Repository Protection
 
 Copyright (c) 2025 Casa24 Records
+Original Creator and Sole Maintainer: Casa24 Records
+
+==============================================================================
+SPECIAL TERMS - PLEASE READ CAREFULLY
+==============================================================================
+
+This repository contains production code that directly powers Casa24's live 
+music platform. While we share it freely with the community, we must protect 
+its integrity to ensure uninterrupted service for all users.
+
+PERMITTED USES:
+✓ Use, copy, and modify this software in YOUR OWN projects (personal or commercial)
+✓ Download, clone, or fork for YOUR OWN development
+✓ Create derivative works OUTSIDE this repository
+✓ Use the soundkits in any music production without attribution (though we'd love to hear what you create!)
+
+STRICTLY PROHIBITED:
+✗ Making or attempting any modifications to THIS original repository
+✗ Submitting pull requests, issues, or change requests to THIS repository  
+✗ Forking with intent to merge changes back to THIS repository
+✗ Any action that could alter the production state of THIS repository
+
+==============================================================================
+A NOTE FROM CASA24
+==============================================================================
+
+Please respect the spirit of this work. This repository was built with care to 
+support the music-making community. We're sharing our production code because 
+we believe in open creativity, not closed gardens.
+
+If you'd like to build on it, that's wonderful! Just do so in your own copy.
+Think of this repository as a master recording—you can sample it, remix it, 
+and create something new, but you can't change the original master.
+
+Thank you for understanding and respecting these boundaries. By doing so, 
+you help ensure this resource remains stable and available for everyone.
+
+==============================================================================
+STANDARD MIT LICENSE TERMS
+==============================================================================
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
+in the Software FOR USE IN THEIR OWN PROJECTS ONLY, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+sell copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+
+2. Any modifications must be made to YOUR OWN COPY of the Software, not to this
+   original repository.
+
+3. No contributions, pull requests, or modifications shall be made or attempted
+   to be made to the original Casa24 Records repository.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -19,3 +65,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+==============================================================================
+
+Created with 💜 by Casa24 Records
+"Building bridges, not walls, in the world of music"
+
+For questions about usage, please refer to our README.md file.
+For your own projects using this code, you're free to do as you wish.
+For this repository itself, please respect our request to leave it unchanged.
+
+Thank you for being part of our creative community.
