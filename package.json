@@ -1,0 +1,52 @@
+{
+  "name": "casa24records/soundkit-library",
+  "version": "1.0.0",
+  "description": "A modular soundkit library with automatic detection and organization",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    },
+    "./manifest": "./manifest.json"
+  },
+  "scripts": {
+    "generate": "node scripts/generate-manifest.js",
+    "build": "npm run generate && npm run build:cjs",
+    "build:cjs": "echo '// CommonJS wrapper\\nmodule.exports = import(\"./index.js\");' > index.cjs",
+    "watch": "nodemon --watch samples --ext wav --exec npm run generate",
+    "test": "node --experimental-json-modules test/test.js",
+    "serve": "npx http-server -c-1 -p 8080",
+    "demo": "npm run generate && npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/soundkit-library.git"
+  },
+  "keywords": [
+    "soundkit",
+    "drums",
+    "samples",
+    "audio",
+    "web-audio-api",
+    "music-production"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.0.0",
+    "http-server": "^14.1.0"
+  },
+  "files": [
+    "index.js",
+    "index.cjs",
+    "manifest.json",
+    "samples/**/*.wav",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
