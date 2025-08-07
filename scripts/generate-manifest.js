@@ -12,7 +12,7 @@ const CONFIG = {
   outputPath: path.join(__dirname, '..', 'manifest.json'),
   instruments: ['kick', 'snare', 'hihat', 'clap', 'crash', 'open', 'rim', 'bell'],
   fileExtension: '.wav',
-  githubPagesBaseUrl: '', // Will be set from environment or config
+  githubPagesBaseUrl: process.env.GITHUB_PAGES_URL || 'https://casa24records.github.io/Drum-Machine-PRO',
 };
 
 class SoundkitScanner {
@@ -227,3 +227,4 @@ if (process.argv[1] === __filename) {
 
 export default SoundkitScanner;
 export { CONFIG };
+
