@@ -29,16 +29,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+          # Removed cache: 'npm' to avoid errors when package-lock.json doesn't exist
 
       - name: Install dependencies
         run: |
           if [ -f "package-lock.json" ]; then
-            echo "Found package-lock.json, using npm ci"
+            echo "Found package-lock.json, using npm ci for faster installation"
             npm ci
           else
-            echo "No package-lock.json found, using npm install"
+            echo "No package-lock.json found, running npm install to create it"
             npm install
+            echo "package-lock.json has been created"
           fi
 
       - name: Generate manifest
@@ -51,6 +52,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add manifest.json
+          # Also add package-lock.json if it was just created
+          if [ -f "package-lock.json" ] && ! git ls-files --error-unmatch package-lock.json > /dev/null 2>&1; then
+            echo "Adding newly created package-lock.json to repository"
+            git add package-lock.json
+          fi
           git diff --staged --quiet || git commit -m "Auto-generate manifest.json [skip ci]"
           git push
 
@@ -64,8 +70,10 @@ jobs:
           cp -r samples _site/
           cp manifest.json _site/
           cp index.js _site/
-          cp demos/index.html _site/
-          echo "Soundkit Library" > _site/index.html
+          if [ -f "demos/index.html" ]; then
+            cp demos/index.html _site/
+          fi
+          echo "<!DOCTYPE html><html><head><title>Drum Machine PRO</title></head><body><h1>Drum Machine PRO Soundkit Library</h1><p>View the <a href='demos/index.html'>Demo</a></p></body></html>" > _site/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
