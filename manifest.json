@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-07T04:29:23.683Z",
-  "totalSoundkits": 0,
+  "generated": "2025-08-07T22:46:58.779Z",
+  "totalSoundkits": 1,
   "instruments": [
     "kick",
     "snare",
@@ -13,9 +13,21 @@
     "bell"
   ],
   "baseUrl": null,
-  "soundkits": [],
+  "soundkits": [
+    {
+      "name": "firealarm",
+      "id": "firealarm",
+      "instruments": {
+        "bell": "bell/firealarm - bell.wav"
+      },
+      "completeness": 12.5,
+      "availableInstruments": [
+        "bell"
+      ]
+    }
+  ],
   "statistics": {
-    "totalFiles": 0,
+    "totalFiles": 1,
     "instrumentCoverage": {
       "kick": 0,
       "snare": 0,
@@ -24,9 +36,9 @@
       "crash": 0,
       "open": 0,
       "rim": 0,
-      "bell": 0
+      "bell": 1
     },
     "completeSoundkits": 0,
-    "averageCompleteness": 0
+    "averageCompleteness": 12.5
   }
 }
