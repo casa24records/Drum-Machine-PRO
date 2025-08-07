@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "generated": "2025-01-01T00:00:00.000Z",
+  "totalSoundkits": 0,
+  "instruments": ["kick", "snare", "hihat", "clap", "crash", "open", "rim", "bell"],
+  "baseUrl": null,
+  "soundkits": [],
+  "statistics": {
+    "totalFiles": 0,
+    "instrumentCoverage": {
+      "kick": 0,
+      "snare": 0,
+      "hihat": 0,
+      "clap": 0,
+      "crash": 0,
+      "open": 0,
+      "rim": 0,
+      "bell": 0
+    },
+    "completeSoundkits": 0,
+    "averageCompleteness": 0
+  }
+}
