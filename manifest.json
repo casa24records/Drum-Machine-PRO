@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-09T18:07:36.959Z",
-  "totalSoundkits": 3,
+  "generated": "2025-08-09T18:23:54.028Z",
+  "totalSoundkits": 4,
   "instruments": [
     "kick",
     "snare",
@@ -14,6 +14,17 @@
   ],
   "baseUrl": "https://casa24records.github.io/Drum-Machine-PRO",
   "soundkits": [
+    {
+      "name": "CHANTIN",
+      "id": "chantin",
+      "instruments": {
+        "bell": "bell/CHANTIN - bell.wav"
+      },
+      "completeness": 12.5,
+      "availableInstruments": [
+        "bell"
+      ]
+    },
     {
       "name": "CREAM",
       "id": "cream",
@@ -91,7 +102,7 @@
     }
   ],
   "statistics": {
-    "totalFiles": 24,
+    "totalFiles": 25,
     "instrumentCoverage": {
       "kick": 3,
       "snare": 3,
@@ -100,9 +111,9 @@
       "crash": 3,
       "open": 3,
       "rim": 3,
-      "bell": 3
+      "bell": 4
     },
     "completeSoundkits": 3,
-    "averageCompleteness": 100
+    "averageCompleteness": 78.125
   }
 }
