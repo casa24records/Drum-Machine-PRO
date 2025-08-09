@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-09T18:06:17.238Z",
+  "generated": "2025-08-09T18:06:43.490Z",
   "totalSoundkits": 3,
   "instruments": [
     "kick",
@@ -72,31 +72,33 @@
         "hihat": "hihat/TRAPIADOR - hihat.wav",
         "clap": "clap/TRAPIADOR - clap.wav",
         "crash": "crash/TRAPIADOR - crash.wav",
+        "open": "open/TRAPIADOR - open.wav",
         "bell": "bell/TRAPIADOR - bell.wav"
       },
-      "completeness": 62.5,
+      "completeness": 75,
       "availableInstruments": [
         "bell",
         "clap",
         "crash",
         "hihat",
-        "kick"
+        "kick",
+        "open"
       ]
     }
   ],
   "statistics": {
-    "totalFiles": 21,
+    "totalFiles": 22,
     "instrumentCoverage": {
       "kick": 3,
       "snare": 2,
       "hihat": 3,
       "clap": 3,
       "crash": 3,
-      "open": 2,
+      "open": 3,
       "rim": 2,
       "bell": 3
     },
     "completeSoundkits": 2,
-    "averageCompleteness": 87.5
+    "averageCompleteness": 91.66666666666667
   }
 }
