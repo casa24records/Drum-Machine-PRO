@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-09T17:43:52.947Z",
+  "generated": "2025-08-09T17:44:14.758Z",
   "totalSoundkits": 2,
   "instruments": [
     "kick",
@@ -18,11 +18,13 @@
       "name": "CREAM",
       "id": "cream",
       "instruments": {
+        "clap": "clap/CREAM - clap.wav",
         "bell": "bell/CREAM - bell.wav"
       },
-      "completeness": 12.5,
+      "completeness": 25,
       "availableInstruments": [
-        "bell"
+        "bell",
+        "clap"
       ]
     },
     {
@@ -52,18 +54,18 @@
     }
   ],
   "statistics": {
-    "totalFiles": 9,
+    "totalFiles": 10,
     "instrumentCoverage": {
       "kick": 1,
       "snare": 1,
       "hihat": 1,
-      "clap": 1,
+      "clap": 2,
       "crash": 1,
       "open": 1,
       "rim": 1,
       "bell": 2
     },
     "completeSoundkits": 1,
-    "averageCompleteness": 56.25
+    "averageCompleteness": 62.5
   }
 }
