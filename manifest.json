@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-09T18:24:23.522Z",
+  "generated": "2025-08-09T18:24:54.702Z",
   "totalSoundkits": 4,
   "instruments": [
     "kick",
@@ -18,15 +18,17 @@
       "name": "CHANTIN",
       "id": "chantin",
       "instruments": {
+        "hihat": "hihat/CHANTIN - hihat.wav",
         "clap": "clap/CHANTIN - clap.wav",
         "crash": "crash/CHANTIN - crash.wav",
         "bell": "bell/CHANTIN - bell.wav"
       },
-      "completeness": 37.5,
+      "completeness": 50,
       "availableInstruments": [
         "bell",
         "clap",
-        "crash"
+        "crash",
+        "hihat"
       ]
     },
     {
@@ -106,11 +108,11 @@
     }
   ],
   "statistics": {
-    "totalFiles": 27,
+    "totalFiles": 28,
     "instrumentCoverage": {
       "kick": 3,
       "snare": 3,
-      "hihat": 3,
+      "hihat": 4,
       "clap": 4,
       "crash": 4,
       "open": 3,
@@ -118,6 +120,6 @@
       "bell": 4
     },
     "completeSoundkits": 3,
-    "averageCompleteness": 84.375
+    "averageCompleteness": 87.5
   }
 }
