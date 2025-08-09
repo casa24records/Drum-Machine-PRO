@@ -1,373 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soundkit Library Demo</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drum Machine PRO - Interactive Demo</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-bg: #1a1a1a;
+      --color-text: #e0e0e0;
+      --color-accent: #00a651;
+      --color-secondary: #2a2a2a;
+      --color-hover: #00ff7f;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(rgba(0, 166, 81, 0.1) 2px, transparent 2px),
+        radial-gradient(rgba(107, 127, 215, 0.1) 2px, transparent 2px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
 
-        h1 {
-            color: white;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
+    h1, h2, h3 {
+      font-family: 'VT323', monospace;
+      letter-spacing: 2px;
+    }
 
-        .soundkit-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 2rem;
-        }
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
+      border-bottom: 2px solid var(--color-accent);
+      margin-bottom: 2rem;
+    }
 
-        .soundkit-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+    .header h1 {
+      font-size: 3rem;
+      color: var(--color-accent);
+      text-shadow: 0 0 20px rgba(0, 166, 81, 0.5);
+      margin-bottom: 0.5rem;
+    }
 
-        .soundkit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
+    .header p {
+      color: #999;
+      font-size: 1.125rem;
+    }
 
-        .soundkit-card h3 {
-            margin-bottom: 10px;
-            color: #667eea;
-        }
+    .header-nav {
+      margin-top: 1rem;
+    }
 
-        .completeness {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+    .nav-link {
+      color: var(--color-accent);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border: 1px solid var(--color-accent);
+      border-radius: 0.375rem;
+      display: inline-block;
+      transition: all 0.3s;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
 
-        .completeness-bar {
-            flex: 1;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-right: 10px;
-        }
+    .nav-link:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 166, 81, 0.5);
+    }
 
-        .completeness-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.3s;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 2rem;
+    }
 
-        .instruments {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-        }
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 0.75rem;
+      border: 1px solid #333;
+      flex-wrap: wrap;
+    }
 
-        .instrument-btn {
-            padding: 8px;
-            border: none;
-            border-radius: 6px;
-            background: #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 12px;
-            text-transform: capitalize;
-        }
+    .kit-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-        .instrument-btn.available {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
+    .kit-label {
+      color: #999;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
 
-        .instrument-btn.available:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
+    .kit-select {
+      background: var(--color-secondary);
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
 
-        .instrument-btn.available:active {
-            transform: scale(0.95);
-        }
+    .kit-select:hover {
+      background: rgba(0, 166, 81, 0.1);
+      box-shadow: 0 0 10px rgba(0, 166, 81, 0.3);
+    }
 
-        .stats {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
 
-        .stats h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-        }
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(26, 26, 26, 0.9);
+      border: 2px solid var(--color-accent);
+      border-radius: 0.5rem;
+      box-shadow: 4px 4px 0px rgba(0, 166, 81, 0.3);
+    }
 
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--color-accent);
+      font-family: 'VT323', monospace;
+    }
 
-        .stat-item {
-            text-align: center;
-            padding: 10px;
-            background: #f8f8f8;
-            border-radius: 8px;
-        }
+    .stat-label {
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+    }
 
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #764ba2;
-        }
+    .soundkit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
 
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 5px;
-        }
+    .soundkit-card {
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 42, 42, 0.95) 100%);
+      border: 2px solid var(--color-accent);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 4px 4px 0px rgba(0, 166, 81, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .loading {
-            text-align: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-top: 100px;
-        }
+    .soundkit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 166, 81, 0.4);
+    }
 
-        .error {
-            background: #ff6b6b;
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 20px 0;
-        }
+    .soundkit-card h3 {
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
 
-        .controls {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+    .completeness {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
 
-        .search-box {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s;
-        }
+    .completeness-bar {
+      flex: 1;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 1rem;
+      border: 1px solid #333;
+    }
 
-        .search-box:focus {
-            outline: none;
-            border-color: #667eea;
-        }
+    .completeness-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-hover));
+      transition: width 0.3s;
+    }
 
-        .no-results {
-            text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            margin-top: 50px;
-        }
-    </style>
+    .instruments {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .instrument-btn {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .instrument-btn.available {
+      background: linear-gradient(135deg, var(--color-accent), #00c251);
+      color: var(--color-bg);
+    }
+
+    .instrument-btn.available:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 166, 81, 0.5);
+    }
+
+    .instrument-btn.available:active {
+      transform: scale(0.95);
+    }
+
+    .instrument-btn:disabled {
+      background: rgba(0, 0, 0, 0.3);
+      color: #555;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 4rem;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(0, 166, 81, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--color-accent);
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error {
+      background: rgba(255, 0, 0, 0.1);
+      border: 2px solid #ff0000;
+      color: #ff6666;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .search-box {
+      padding: 0.75rem 1rem;
+      background: var(--color-secondary);
+      border: 2px solid var(--color-accent);
+      border-radius: 0.5rem;
+      color: var(--color-text);
+      font-family: 'Space Mono', monospace;
+      transition: all 0.3s;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .search-box:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      border-top: 2px solid #333;
+      color: #999;
+    }
+
+    .footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .footer a:hover {
+      color: var(--color-hover);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .soundkit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .instruments {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎵 Soundkit Library Demo</h1>
-        
-        <div class="stats" id="stats">
-            <h2>Library Statistics</h2>
-            <div class="stat-grid" id="statGrid">
-                <div class="loading">Loading statistics...</div>
-            </div>
-        </div>
+  <header class="header">
+    <h1>🥁 DRUM MACHINE PRO</h1>
+    <p>Interactive Soundkit Demo</p>
+    <div class="header-nav">
+      <a href="../index.html" class="nav-link">← Back to Catalog</a>
+      <a href="https://github.com/casa24records/Drum-Machine-PRO" class="nav-link">GitHub</a>
+    </div>
+  </header>
 
-        <div class="controls">
-            <input type="text" class="search-box" id="searchBox" placeholder="Search soundkits...">
-        </div>
-
-        <div class="soundkit-grid" id="soundkitGrid">
-            <div class="loading">Loading soundkits...</div>
-        </div>
+  <div class="container">
+    <div class="controls">
+      <div class="kit-selector">
+        <label for="kitSelect" class="kit-label">Sound Kit:</label>
+        <select class="kit-select" id="kitSelect">
+          <!-- Will be populated dynamically -->
+        </select>
+      </div>
+      <input type="text" class="search-box" id="searchBox" placeholder="Search soundkits..." />
     </div>
 
-    <script type="module">
-        // Configuration - Update this to match your repository
-        const REPO_BASE_URL = window.location.origin; // Or your GitHub Pages URL
-        const MANIFEST_URL = `${REPO_BASE_URL}/manifest.json`;
-        const SAMPLES_BASE_URL = `${REPO_BASE_URL}/samples`;
+    <div class="stat-grid" id="statsGrid">
+      <div class="stat-item">
+        <div class="stat-value" id="totalSoundkits">0</div>
+        <div class="stat-label">Total Soundkits</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="totalFiles">0</div>
+        <div class="stat-label">Total Files</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="completeSoundkits">0</div>
+        <div class="stat-label">Complete Kits</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="averageCompleteness">0%</div>
+        <div class="stat-label">Avg Completeness</div>
+      </div>
+    </div>
 
-        let audioContext;
-        let currentBuffers = {};
-        let manifest;
-        let allSoundkits = [];
+    <div class="soundkit-grid" id="soundkitGrid">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p style="color: var(--color-accent);">Loading soundkits...</p>
+      </div>
+    </div>
+  </div>
 
-        // Initialize Audio Context
-        function initAudioContext() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            return audioContext;
+  <footer class="footer">
+    <p>© 2025 Casa 24 Records • <a href="https://github.com/casa24records/Drum-Machine-PRO">GitHub</a></p>
+    <p style="margin-top: 0.5rem; font-size: 0.875rem;">Building bridges, not walls, in the world of music</p>
+  </footer>
+
+  <script type="module">
+    // Configuration
+    const REPO_BASE_URL = window.location.origin + window.location.pathname.replace('/demos/index.html', '');
+    const MANIFEST_URL = `${REPO_BASE_URL}/manifest.json`;
+    const SAMPLES_BASE_URL = `${REPO_BASE_URL}/samples`;
+
+    let audioContext;
+    let currentBuffers = {};
+    let manifest;
+    let allSoundkits = [];
+
+    // Initialize Audio Context
+    function initAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioContext;
+    }
+
+    // Play a sample
+    async function playSample(soundkitName, instrument) {
+      const context = initAudioContext();
+      
+      // Resume context if suspended (browser policy)
+      if (context.state === 'suspended') {
+        await context.resume();
+      }
+
+      const soundkit = allSoundkits.find(s => s.name === soundkitName);
+      if (!soundkit || !soundkit.instruments[instrument]) {
+        console.error(`Sample not found: ${soundkitName} - ${instrument}`);
+        return;
+      }
+
+      const samplePath = soundkit.instruments[instrument];
+      const url = `${SAMPLES_BASE_URL}/${samplePath}`;
+      
+      try {
+        // Check if we already have this buffer
+        const bufferKey = `${soundkit.id}_${instrument}`;
+        if (!currentBuffers[bufferKey]) {
+          const response = await fetch(url);
+          const arrayBuffer = await response.arrayBuffer();
+          currentBuffers[bufferKey] = await context.decodeAudioData(arrayBuffer);
         }
 
-        // Play a sample
-        async function playSample(soundkitName, instrument) {
-            const context = initAudioContext();
-            
-            // Resume context if suspended (browser policy)
-            if (context.state === 'suspended') {
-                await context.resume();
-            }
+        // Create and play buffer source
+        const source = context.createBufferSource();
+        source.buffer = currentBuffers[bufferKey];
+        source.connect(context.destination);
+        source.start(0);
+      } catch (error) {
+        console.error(`Error playing sample: ${error.message}`);
+      }
+    }
 
-            const soundkit = allSoundkits.find(s => s.name === soundkitName);
-            if (!soundkit || !soundkit.instruments[instrument]) {
-                console.error(`Sample not found: ${soundkitName} - ${instrument}`);
-                return;
-            }
-
-            const samplePath = soundkit.instruments[instrument];
-            const url = `${SAMPLES_BASE_URL}/${samplePath}`;
-            
-            try {
-                // Check if we already have this buffer
-                const bufferKey = `${soundkit.id}_${instrument}`;
-                if (!currentBuffers[bufferKey]) {
-                    const response = await fetch(url);
-                    const arrayBuffer = await response.arrayBuffer();
-                    currentBuffers[bufferKey] = await context.decodeAudioData(arrayBuffer);
-                }
-
-                // Create and play buffer source
-                const source = context.createBufferSource();
-                source.buffer = currentBuffers[bufferKey];
-                source.connect(context.destination);
-                source.start(0);
-            } catch (error) {
-                console.error(`Error playing sample: ${error.message}`);
-            }
+    // Load and display soundkits
+    async function loadSoundkits() {
+      try {
+        const response = await fetch(MANIFEST_URL);
+        if (!response.ok) {
+          throw new Error(`Failed to load manifest: ${response.statusText}`);
         }
-
-        // Load and display soundkits
-        async function loadSoundkits() {
-            try {
-                const response = await fetch(MANIFEST_URL);
-                if (!response.ok) {
-                    throw new Error(`Failed to load manifest: ${response.statusText}`);
-                }
-                
-                manifest = await response.json();
-                allSoundkits = manifest.soundkits;
-                
-                displayStatistics(manifest.statistics);
-                displaySoundkits(allSoundkits);
-                
-            } catch (error) {
-                console.error('Error loading soundkits:', error);
-                document.getElementById('soundkitGrid').innerHTML = 
-                    `<div class="error">Error loading soundkits: ${error.message}</div>`;
-            }
+        
+        manifest = await response.json();
+        allSoundkits = manifest.soundkits;
+        
+        displayStatistics(manifest.statistics);
+        displaySoundkits(allSoundkits);
+        populateKitSelector();
+        
+        // Check for hash in URL to select specific kit
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+          const kitSelect = document.getElementById('kitSelect');
+          const matchingKit = allSoundkits.find(kit => kit.id === hash);
+          if (matchingKit && kitSelect) {
+            kitSelect.value = matchingKit.name;
+            filterSoundkits(matchingKit.name);
+          }
         }
+        
+      } catch (error) {
+        console.error('Error loading soundkits:', error);
+        document.getElementById('soundkitGrid').innerHTML = 
+          `<div class="error">Error loading soundkits: ${error.message}</div>`;
+      }
+    }
 
-        // Display statistics
-        function displayStatistics(stats) {
-            const statGrid = document.getElementById('statGrid');
-            
-            statGrid.innerHTML = `
-                <div class="stat-item">
-                    <div class="stat-value">${manifest.totalSoundkits}</div>
-                    <div class="stat-label">Total Soundkits</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${stats.totalFiles}</div>
-                    <div class="stat-label">Total Files</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${stats.completeSoundkits}</div>
-                    <div class="stat-label">Complete Kits</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${stats.averageCompleteness.toFixed(0)}%</div>
-                    <div class="stat-label">Avg Completeness</div>
-                </div>
-            `;
-        }
+    // Display statistics
+    function displayStatistics(stats) {
+      document.getElementById('totalSoundkits').textContent = manifest.totalSoundkits;
+      document.getElementById('totalFiles').textContent = stats.totalFiles;
+      document.getElementById('completeSoundkits').textContent = stats.completeSoundkits;
+      document.getElementById('averageCompleteness').textContent = stats.averageCompleteness.toFixed(0) + '%';
+    }
 
-        // Display soundkit cards
-        function displaySoundkits(soundkits) {
-            const grid = document.getElementById('soundkitGrid');
-            
-            if (soundkits.length === 0) {
-                grid.innerHTML = '<div class="no-results">No soundkits found</div>';
-                return;
-            }
-            
-            grid.innerHTML = soundkits.map(soundkit => `
-                <div class="soundkit-card">
-                    <h3>${soundkit.name}</h3>
-                    <div class="completeness">
-                        <div class="completeness-bar">
-                            <div class="completeness-fill" style="width: ${soundkit.completeness}%"></div>
-                        </div>
-                        <span>${soundkit.completeness.toFixed(0)}%</span>
-                    </div>
-                    <div class="instruments">
-                        ${manifest.instruments.map(instrument => `
-                            <button 
-                                class="instrument-btn ${soundkit.availableInstruments.includes(instrument) ? 'available' : ''}"
-                                ${soundkit.availableInstruments.includes(instrument) ? 
-                                    `onclick="playSample('${soundkit.name}', '${instrument}')"` : 
-                                    'disabled'}
-                            >
-                                ${instrument}
-                            </button>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
+    // Populate kit selector
+    function populateKitSelector() {
+      const kitSelect = document.getElementById('kitSelect');
+      kitSelect.innerHTML = '<option value="">All Soundkits</option>';
+      
+      allSoundkits.forEach(kit => {
+        const option = document.createElement('option');
+        option.value = kit.name;
+        option.textContent = `${kit.name} (${kit.completeness}%)`;
+        kitSelect.appendChild(option);
+      });
+    }
 
-        // Search functionality
-        function setupSearch() {
-            const searchBox = document.getElementById('searchBox');
-            searchBox.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                const filtered = allSoundkits.filter(soundkit => 
-                    soundkit.name.toLowerCase().includes(query)
-                );
-                displaySoundkits(filtered);
-            });
-        }
+    // Display soundkit cards
+    function displaySoundkits(soundkits) {
+      const grid = document.getElementById('soundkitGrid');
+      
+      if (soundkits.length === 0) {
+        grid.innerHTML = '<div class="error">No soundkits found</div>';
+        return;
+      }
+      
+      grid.innerHTML = soundkits.map(soundkit => `
+        <div class="soundkit-card">
+          <h3>${soundkit.name}</h3>
+          <div class="completeness">
+            <div class="completeness-bar">
+              <div class="completeness-fill" style="width: ${soundkit.completeness}%"></div>
+            </div>
+            <span style="color: ${soundkit.completeness === 100 ? 'var(--color-accent)' : '#ff6b00'};">
+              ${soundkit.completeness.toFixed(0)}%
+            </span>
+          </div>
+          <div class="instruments">
+            ${manifest.instruments.map(instrument => `
+              <button 
+                class="instrument-btn ${soundkit.availableInstruments.includes(instrument) ? 'available' : ''}"
+                ${soundkit.availableInstruments.includes(instrument) ? 
+                  `onclick="playSample('${soundkit.name}', '${instrument}')"` : 
+                  'disabled'}
+              >
+                ${instrument.substring(0, 4).toUpperCase()}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
 
-        // Initialize on load
-        window.addEventListener('DOMContentLoaded', () => {
-            loadSoundkits();
-            setupSearch();
-        });
+    // Filter soundkits
+    function filterSoundkits(query) {
+      const filtered = query ? 
+        allSoundkits.filter(kit => kit.name === query) : 
+        allSoundkits;
+      displaySoundkits(filtered);
+    }
 
-        // Make playSample available globally for onclick handlers
-        window.playSample = playSample;
-    </script>
+    // Search functionality
+    function setupSearch() {
+      const searchBox = document.getElementById('searchBox');
+      const kitSelect = document.getElementById('kitSelect');
+
+      searchBox.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const filtered = allSoundkits.filter(soundkit => 
+          soundkit.name.toLowerCase().includes(query)
+        );
+        displaySoundkits(filtered);
+        kitSelect.value = ''; // Reset kit selector
+      });
+
+      kitSelect.addEventListener('change', (e) => {
+        filterSoundkits(e.target.value);
+        searchBox.value = ''; // Clear search box
+      });
+    }
+
+    // Make playSample available globally for onclick handlers
+    window.playSample = playSample;
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSoundkits();
+      setupSearch();
+    });
+  </script>
 </body>
 </html>
