@@ -3,177 +3,809 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drum Machine PRO - Soundkit Catalog by Casa24</title>
+  <title>Drum Machine PRO - Soundkit Library by Casa 24 Records</title>
   
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   
-  <!-- Meta tags -->
-  <meta name="description" content="Professional soundkit library for Drum Machine PRO. High-quality drum samples organized and ready for Web Audio API.">
-  <meta name="author" content="Casa24 Records">
-  <meta property="og:title" content="Drum Machine PRO - Soundkit Catalog">
-  <meta property="og:description" content="Free professional soundkit library by Casa24 Records">
-  <meta property="og:type" content="website">
+  <style>
+    :root {
+      --color-bg: #1a1a1a;
+      --color-text: #e0e0e0;
+      --color-accent: #00a651;
+      --color-secondary: #2a2a2a;
+      --color-hover: #00ff7f;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(rgba(0, 166, 81, 0.1) 2px, transparent 2px),
+        radial-gradient(rgba(107, 127, 215, 0.1) 2px, transparent 2px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'VT323', monospace;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
+      border-radius: 1rem;
+      border: 2px solid var(--color-accent);
+      box-shadow: 0 10px 40px rgba(0, 166, 81, 0.2);
+    }
+
+    .header h1 {
+      font-size: 3.5rem;
+      color: var(--color-accent);
+      text-shadow: 0 0 20px rgba(0, 166, 81, 0.5);
+      margin-bottom: 0.5rem;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px rgba(0, 166, 81, 0.5); }
+      to { text-shadow: 0 0 20px rgba(0, 166, 81, 0.8), 0 0 30px rgba(0, 166, 81, 0.4); }
+    }
+
+    .header p {
+      color: #999;
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .tagline {
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      opacity: 0.8;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: rgba(26, 26, 26, 0.9);
+      border: 2px solid var(--color-accent);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 4px 4px 0px rgba(0, 166, 81, 0.5);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .stat-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px rgba(0, 166, 81, 0.7);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--color-accent);
+      font-family: 'VT323', monospace;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #999;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 0.75rem;
+      border: 1px solid #333;
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 400px;
+      padding: 0.75rem 1rem;
+      background: var(--color-secondary);
+      border: 2px solid var(--color-accent);
+      border-radius: 0.5rem;
+      color: var(--color-text);
+      font-family: 'Space Mono', monospace;
+      transition: all 0.3s;
+    }
+
+    .search-box:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--color-secondary);
+      border: 2px solid #444;
+      border-radius: 0.5rem;
+      color: #999;
+      font-family: 'Space Mono', monospace;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      background: rgba(0, 166, 81, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 166, 81, 0.3);
+    }
+
+    /* Soundkit Grid */
+    .soundkit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .soundkit-card {
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 42, 42, 0.95) 100%);
+      border: 2px solid var(--color-accent);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 4px 4px 0px rgba(0, 166, 81, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .soundkit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 166, 81, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .soundkit-card:hover::before {
+      left: 100%;
+    }
+
+    .soundkit-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 166, 81, 0.4);
+      border-color: var(--color-hover);
+    }
+
+    .soundkit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .soundkit-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-accent);
+      font-family: 'VT323', monospace;
+      text-transform: uppercase;
+    }
+
+    .completeness-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      font-family: 'VT323', monospace;
+    }
+
+    .complete {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .incomplete {
+      background: #ff6b00;
+      color: var(--color-bg);
+    }
+
+    .soundkit-instruments {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .instrument-btn {
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .instrument-btn.available {
+      background: linear-gradient(135deg, var(--color-accent), #00c251);
+      color: var(--color-bg);
+      border-color: var(--color-accent);
+    }
+
+    .instrument-btn.available:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 166, 81, 0.5);
+    }
+
+    .instrument-btn.available:active {
+      transform: scale(0.95);
+    }
+
+    .instrument-btn.unavailable {
+      background: rgba(0, 0, 0, 0.3);
+      color: #555;
+      border-color: #333;
+      cursor: not-allowed;
+    }
+
+    .soundkit-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 0.5rem;
+      background: rgba(0, 166, 81, 0.1);
+      border: 1px solid var(--color-accent);
+      border-radius: 0.375rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .action-btn:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 166, 81, 0.5);
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 4rem;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(0, 166, 81, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--color-accent);
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: var(--color-accent);
+      font-size: 1.25rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      border-top: 2px solid #333;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      color: var(--color-accent);
+      font-family: 'VT323', monospace;
+      margin-bottom: 1rem;
+    }
+
+    .footer-text {
+      color: #999;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .footer-link {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
+
+    .footer-link:hover {
+      color: var(--color-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Audio Context Resume Button */
+    .audio-context-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 1rem;
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 166, 81, 0.5);
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .audio-context-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(0, 166, 81, 0.7);
+    }
+
+    .audio-context-btn.hidden {
+      display: none;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .soundkit-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .soundkit-instruments {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Vinyl decoration */
+    .vinyl-decoration {
+      position: fixed;
+      top: -150px;
+      right: -150px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(0, 166, 81, 0.05) 21%,
+        rgba(0, 166, 81, 0.05) 34%,
+        transparent 35%,
+        transparent 50%,
+        rgba(0, 166, 81, 0.05) 51%,
+        rgba(0, 166, 81, 0.05) 64%,
+        transparent 65%
+      );
+      border-radius: 50%;
+      animation: rotate 20s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #999;
+      font-size: 1.25rem;
+    }
+
+    .no-results-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 <body>
-  <!-- Decorative elements -->
+  <!-- Vinyl Decoration -->
   <div class="vinyl-decoration"></div>
-  <div class="cassette-decoration"></div>
-  
+
   <div class="container">
     <!-- Header -->
     <header class="header">
-      <div class="header-content">
-        <h1 class="main-title">
-          <span class="title-accent">🎵</span> Drum Machine PRO
-        </h1>
-        <p class="subtitle">Free Soundkit Library by Casa24 Records</p>
-        <p class="tagline">"Building bridges, not walls, in the world of music"</p>
-        <div class="last-updated" id="last-updated">
-          <span class="update-label">Last Updated:</span>
-          <span class="update-date" id="update-date">Loading...</span>
-        </div>
-      </div>
+      <h1>DRUM MACHINE PRO</h1>
+      <p>Professional Soundkit Library</p>
+      <p class="tagline">By Casa 24 Records • We Out Here</p>
     </header>
 
-    <!-- Navigation -->
-    <nav class="nav-section">
-      <div class="nav-links">
-        <a href="#catalog" class="nav-link active">Soundkit Catalog</a>
-        <a href="demos/" class="nav-link">Interactive Demo</a>
-        <a href="https://github.com/casa24records/Drum-Machine-PRO" target="_blank" rel="noopener noreferrer" class="nav-link">
-          <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-          </svg>
-          GitHub
-        </a>
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar">
+      <div class="stat-card">
+        <div class="stat-value" id="totalKits">0</div>
+        <div class="stat-label">Total Soundkits</div>
       </div>
-    </nav>
+      <div class="stat-card">
+        <div class="stat-value" id="totalSamples">0</div>
+        <div class="stat-label">Total Samples</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="completeKits">0</div>
+        <div class="stat-label">Complete Kits</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="avgCompleteness">0%</div>
+        <div class="stat-label">Avg Completeness</div>
+      </div>
+    </div>
 
-    <!-- Statistics Section -->
-    <section class="stats-section">
-      <div class="stats-grid" id="stats-grid">
-        <!-- Stats will be dynamically inserted here -->
-      </div>
-    </section>
+    <!-- Controls -->
+    <div class="controls">
+      <input type="text" class="search-box" id="searchBox" placeholder="Search soundkits..." />
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="complete">Complete</button>
+      <button class="filter-btn" data-filter="incomplete">Incomplete</button>
+    </div>
 
-    <!-- Controls Section -->
-    <section class="controls-section">
-      <div class="controls-wrapper">
-        <div class="control-group">
-          <label for="search-input" class="control-label">Search:</label>
-          <input 
-            type="text" 
-            id="search-input" 
-            class="search-input" 
-            placeholder="Search soundkits..."
-            autocomplete="off"
-          >
-        </div>
-        
-        <div class="control-group">
-          <label for="sort-select" class="control-label">Sort by:</label>
-          <select id="sort-select" class="sort-select">
-            <option value="name-asc">Name (A-Z)</option>
-            <option value="name-desc">Name (Z-A)</option>
-            <option value="completeness-desc">Completeness (High-Low)</option>
-            <option value="completeness-asc">Completeness (Low-High)</option>
-          </select>
-        </div>
-        
-        <div class="control-group">
-          <label for="filter-select" class="control-label">Filter:</label>
-          <select id="filter-select" class="filter-select">
-            <option value="all">All Soundkits</option>
-            <option value="complete">Complete Only (100%)</option>
-            <option value="incomplete">Incomplete Only</option>
-          </select>
-        </div>
-      </div>
-    </section>
-
-    <!-- Soundkit Catalog -->
-    <main class="catalog-section">
-      <div class="catalog-header">
-        <h2 class="section-title">Available Soundkits</h2>
-        <div class="catalog-count" id="catalog-count">
-          Showing <span id="visible-count">0</span> of <span id="total-count">0</span> soundkits
-        </div>
-      </div>
-      
-      <div class="soundkit-grid" id="soundkit-grid">
-        <!-- Soundkit cards will be dynamically inserted here -->
-        <div class="loading-state">
-          <div class="loading-spinner"></div>
-          <p class="loading-text">Loading soundkits...</p>
-        </div>
-      </div>
-    </main>
-
-    <!-- Audio Player Modal -->
-    <div id="audio-modal" class="audio-modal" style="display: none;">
-      <div class="modal-overlay"></div>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="modal-title">Soundkit Preview</h3>
-          <button class="modal-close" id="modal-close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 6L6 18M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="audio-controls" id="audio-controls">
-            <!-- Audio controls will be dynamically inserted here -->
-          </div>
-        </div>
+    <!-- Soundkit Grid -->
+    <div class="soundkit-grid" id="soundkitGrid">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading soundkits...</div>
       </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3 class="footer-title">About</h3>
-          <p class="footer-text">
-            Drum Machine PRO is a production-ready soundkit API that powers Casa24's music tools. 
-            Free for everyone, no strings attached.
-          </p>
-        </div>
-        
-        <div class="footer-section">
-          <h3 class="footer-title">Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="demos/">Try Demo</a></li>
-            <li><a href="https://github.com/casa24records/Drum-Machine-PRO#readme" target="_blank">Documentation</a></li>
-            <li><a href="https://github.com/casa24records/Drum-Machine-PRO/blob/main/LICENSE" target="_blank">License</a></li>
-            <li><a href="manifest.json" target="_blank">API Endpoint</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h3 class="footer-title">Usage</h3>
-          <div class="code-snippet">
-            <code>
-              import soundkitManager from 'https://casa24records.github.io/Drum-Machine-PRO/index.js';
-            </code>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>Created with 💜 by <strong>Casa24 Records</strong> © 2025</p>
-        <p class="footer-motto">We Out Here</p>
+      <div class="footer-logo">CASA 24 RECORDS</div>
+      <p class="footer-text">Building bridges, not walls, in the world of music</p>
+      <p class="footer-text">© 2025 Casa 24 Records • All samples free to use</p>
+      <div class="footer-links">
+        <a href="https://github.com/casa24records/Drum-Machine-PRO" class="footer-link">GitHub</a>
+        <a href="demos/index.html" class="footer-link">Interactive Demo</a>
+        <a href="manifest.json" class="footer-link">API</a>
       </div>
     </footer>
   </div>
 
-  <!-- Scripts -->
-  <script type="module" src="js/soundkit-catalog.js"></script>
+  <!-- Audio Context Resume Button -->
+  <button class="audio-context-btn hidden" id="audioContextBtn" title="Enable Audio">
+    🔊
+  </button>
+
+  <script type="module">
+    // Configuration
+    const MANIFEST_URL = './manifest.json';
+    const SAMPLES_BASE_URL = './samples';
+    
+    // State
+    let audioContext = null;
+    let manifest = null;
+    let allSoundkits = [];
+    let filteredSoundkits = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let audioBuffers = {};
+    
+    // Initialize Audio Context
+    function initAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Hide audio button once context is running
+        if (audioContext.state === 'running') {
+          document.getElementById('audioContextBtn').classList.add('hidden');
+        }
+        
+        // Handle state changes
+        audioContext.addEventListener('statechange', () => {
+          const btn = document.getElementById('audioContextBtn');
+          if (audioContext.state === 'running') {
+            btn.classList.add('hidden');
+          } else if (audioContext.state === 'suspended') {
+            btn.classList.remove('hidden');
+          }
+        });
+      }
+      
+      return audioContext;
+    }
+    
+    // Play sample
+    async function playSample(soundkitId, instrument) {
+      const context = initAudioContext();
+      
+      // Resume context if suspended
+      if (context.state === 'suspended') {
+        await context.resume();
+      }
+      
+      const soundkit = allSoundkits.find(s => s.id === soundkitId);
+      if (!soundkit || !soundkit.instruments[instrument]) {
+        console.error(`Sample not found: ${soundkitId} - ${instrument}`);
+        return;
+      }
+      
+      const samplePath = soundkit.instruments[instrument];
+      const url = `${SAMPLES_BASE_URL}/${samplePath}`;
+      
+      try {
+        // Check if we already have this buffer
+        const bufferKey = `${soundkit.id}_${instrument}`;
+        if (!audioBuffers[bufferKey]) {
+          const response = await fetch(url);
+          const arrayBuffer = await response.arrayBuffer();
+          audioBuffers[bufferKey] = await context.decodeAudioData(arrayBuffer);
+        }
+        
+        // Create and play buffer source
+        const source = context.createBufferSource();
+        source.buffer = audioBuffers[bufferKey];
+        source.connect(context.destination);
+        source.start(0);
+      } catch (error) {
+        console.error(`Error playing sample: ${error.message}`);
+      }
+    }
+    
+    // Load manifest
+    async function loadManifest() {
+      try {
+        const response = await fetch(MANIFEST_URL);
+        if (!response.ok) {
+          throw new Error(`Failed to load manifest: ${response.statusText}`);
+        }
+        
+        manifest = await response.json();
+        allSoundkits = manifest.soundkits || [];
+        
+        // Update stats
+        updateStats();
+        
+        // Initial render
+        filterAndRender();
+        
+      } catch (error) {
+        console.error('Error loading manifest:', error);
+        document.getElementById('soundkitGrid').innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">⚠️</div>
+            <p>Error loading soundkits. Please try again later.</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Update statistics
+    function updateStats() {
+      if (!manifest) return;
+      
+      document.getElementById('totalKits').textContent = manifest.totalSoundkits || 0;
+      document.getElementById('totalSamples').textContent = manifest.statistics?.totalFiles || 0;
+      document.getElementById('completeKits').textContent = manifest.statistics?.completeSoundkits || 0;
+      document.getElementById('avgCompleteness').textContent = 
+        `${Math.round(manifest.statistics?.averageCompleteness || 0)}%`;
+    }
+    
+    // Filter soundkits
+    function filterSoundkits() {
+      filteredSoundkits = allSoundkits.filter(soundkit => {
+        // Apply filter
+        if (currentFilter === 'complete' && soundkit.completeness !== 100) return false;
+        if (currentFilter === 'incomplete' && soundkit.completeness === 100) return false;
+        
+        // Apply search
+        if (searchQuery) {
+          const query = searchQuery.toLowerCase();
+          return soundkit.name.toLowerCase().includes(query) ||
+                 soundkit.availableInstruments.some(inst => inst.toLowerCase().includes(query));
+        }
+        
+        return true;
+      });
+    }
+    
+    // Render soundkits
+    function renderSoundkits() {
+      const grid = document.getElementById('soundkitGrid');
+      
+      if (filteredSoundkits.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <p>No soundkits found matching your criteria.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      grid.innerHTML = filteredSoundkits.map(soundkit => {
+        const isComplete = soundkit.completeness === 100;
+        const instruments = manifest.instruments || [];
+        
+        return `
+          <div class="soundkit-card" data-soundkit-id="${soundkit.id}">
+            <div class="soundkit-header">
+              <h3 class="soundkit-name">${soundkit.name}</h3>
+              <span class="completeness-badge ${isComplete ? 'complete' : 'incomplete'}">
+                ${soundkit.completeness}%
+              </span>
+            </div>
+            
+            <div class="soundkit-instruments">
+              ${instruments.map(instrument => {
+                const isAvailable = soundkit.availableInstruments.includes(instrument);
+                return `
+                  <button 
+                    class="instrument-btn ${isAvailable ? 'available' : 'unavailable'}"
+                    ${isAvailable ? `onclick="playSample('${soundkit.id}', '${instrument}')"` : 'disabled'}
+                    title="${instrument}"
+                  >
+                    ${instrument.substring(0, 4).toUpperCase()}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            
+            <div class="soundkit-actions">
+              <a href="demos/index.html#${soundkit.id}" class="action-btn">Demo</a>
+              <button class="action-btn" onclick="downloadKit('${soundkit.id}')">Download</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    // Filter and render
+    function filterAndRender() {
+      filterSoundkits();
+      renderSoundkits();
+    }
+    
+    // Download kit (placeholder - would need backend implementation)
+    window.downloadKit = function(soundkitId) {
+      const soundkit = allSoundkits.find(s => s.id === soundkitId);
+      if (soundkit) {
+        alert(`Download feature coming soon!\n\nSoundkit: ${soundkit.name}\nInstruments: ${soundkit.availableInstruments.join(', ')}`);
+      }
+    };
+    
+    // Make playSample global
+    window.playSample = playSample;
+    
+    // Setup event listeners
+    function setupEventListeners() {
+      // Search
+      const searchBox = document.getElementById('searchBox');
+      searchBox.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        filterAndRender();
+      });
+      
+      // Filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          // Apply filter
+          currentFilter = btn.dataset.filter;
+          filterAndRender();
+        });
+      });
+      
+      // Audio context button
+      const audioBtn = document.getElementById('audioContextBtn');
+      audioBtn.addEventListener('click', async () => {
+        const context = initAudioContext();
+        if (context.state === 'suspended') {
+          await context.resume();
+        }
+      });
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      setupEventListeners();
+      loadManifest();
+      
+      // Auto-refresh manifest every 30 seconds
+      setInterval(loadManifest, 30000);
+    });
+  </script>
 </body>
 </html>
