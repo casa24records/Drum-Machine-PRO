@@ -394,11 +394,17 @@
     <p style="margin-top: 0.5rem; font-size: 0.875rem;">Building bridges, not walls, in the world of music</p>
   </footer>
 
-  <script type="module">
-    // Configuration
-    const REPO_BASE_URL = window.location.origin + window.location.pathname.replace('/demos/index.html', '');
+  <script>
+    // Configuration - Updated for proper relative paths
+    const REPO_BASE_URL = window.location.origin + window.location.pathname.replace('/demos/index.html', '').replace('/index.html', '');
     const MANIFEST_URL = `${REPO_BASE_URL}/manifest.json`;
     const SAMPLES_BASE_URL = `${REPO_BASE_URL}/samples`;
+
+    console.log('Demo initialized with URLs:', {
+      base: REPO_BASE_URL,
+      manifest: MANIFEST_URL,
+      samples: SAMPLES_BASE_URL
+    });
 
     let audioContext;
     let currentBuffers = {};
@@ -409,35 +415,43 @@
     function initAudioContext() {
       if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        console.log('Audio context created:', audioContext.state);
       }
       return audioContext;
     }
 
     // Play a sample
-    async function playSample(soundkitName, instrument) {
-      const context = initAudioContext();
-      
-      // Resume context if suspended (browser policy)
-      if (context.state === 'suspended') {
-        await context.resume();
-      }
-
-      const soundkit = allSoundkits.find(s => s.name === soundkitName);
-      if (!soundkit || !soundkit.instruments[instrument]) {
-        console.error(`Sample not found: ${soundkitName} - ${instrument}`);
-        return;
-      }
-
-      const samplePath = soundkit.instruments[instrument];
-      const url = `${SAMPLES_BASE_URL}/${samplePath}`;
-      
+    async function playSample(soundkitName, instrument, event) {
       try {
+        const context = initAudioContext();
+        
+        // Resume context if suspended (browser policy)
+        if (context.state === 'suspended') {
+          await context.resume();
+          console.log('Audio context resumed');
+        }
+
+        const soundkit = allSoundkits.find(s => s.name === soundkitName);
+        if (!soundkit || !soundkit.instruments[instrument]) {
+          console.error(`Sample not found: ${soundkitName} - ${instrument}`);
+          return;
+        }
+
+        const samplePath = soundkit.instruments[instrument];
+        const url = `${SAMPLES_BASE_URL}/${samplePath}`;
+        
+        console.log(`Playing sample from: ${url}`);
+        
         // Check if we already have this buffer
         const bufferKey = `${soundkit.id}_${instrument}`;
         if (!currentBuffers[bufferKey]) {
           const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Failed to load sample: ${response.statusText}`);
+          }
           const arrayBuffer = await response.arrayBuffer();
           currentBuffers[bufferKey] = await context.decodeAudioData(arrayBuffer);
+          console.log(`Decoded buffer for ${bufferKey}`);
         }
 
         // Create and play buffer source
@@ -445,14 +459,26 @@
         source.buffer = currentBuffers[bufferKey];
         source.connect(context.destination);
         source.start(0);
+        console.log(`Playing ${soundkitName} - ${instrument}`);
+        
+        // Visual feedback
+        if (event && event.target) {
+          const button = event.target;
+          button.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            button.style.transform = '';
+          }, 100);
+        }
       } catch (error) {
-        console.error(`Error playing sample: ${error.message}`);
+        console.error(`Error playing sample:`, error);
+        alert(`Could not play sample: ${error.message}`);
       }
     }
 
     // Load and display soundkits
     async function loadSoundkits() {
       try {
+        console.log('Loading manifest from:', MANIFEST_URL);
         const response = await fetch(MANIFEST_URL);
         if (!response.ok) {
           throw new Error(`Failed to load manifest: ${response.statusText}`);
@@ -460,6 +486,11 @@
         
         manifest = await response.json();
         allSoundkits = manifest.soundkits;
+        
+        console.log('Manifest loaded:', {
+          total: manifest.totalSoundkits,
+          kits: allSoundkits.length
+        });
         
         displayStatistics(manifest.statistics);
         displaySoundkits(allSoundkits);
@@ -529,7 +560,7 @@
               <button 
                 class="instrument-btn ${soundkit.availableInstruments.includes(instrument) ? 'available' : ''}"
                 ${soundkit.availableInstruments.includes(instrument) ? 
-                  `onclick="playSample('${soundkit.name}', '${instrument}')"` : 
+                  `onclick="window.playSample('${soundkit.name}', '${instrument}', event)"` : 
                   'disabled'}
               >
                 ${instrument.substring(0, 4).toUpperCase()}
