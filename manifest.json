@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-09T18:26:13.222Z",
+  "generated": "2025-08-09T18:26:35.863Z",
   "totalSoundkits": 4,
   "instruments": [
     "kick",
@@ -19,6 +19,7 @@
       "id": "chantin",
       "instruments": {
         "kick": "kick/CHANTIN - kick.wav",
+        "snare": "snare/CHANTIN - snare.wav",
         "hihat": "hihat/CHANTIN - hihat.wav",
         "clap": "clap/CHANTIN - clap.wav",
         "crash": "crash/CHANTIN - crash.wav",
@@ -26,7 +27,7 @@
         "rim": "rim/CHANTIN - rim.wav",
         "bell": "bell/CHANTIN - bell.wav"
       },
-      "completeness": 87.5,
+      "completeness": 100,
       "availableInstruments": [
         "bell",
         "clap",
@@ -34,7 +35,8 @@
         "hihat",
         "kick",
         "open",
-        "rim"
+        "rim",
+        "snare"
       ]
     },
     {
@@ -114,10 +116,10 @@
     }
   ],
   "statistics": {
-    "totalFiles": 31,
+    "totalFiles": 32,
     "instrumentCoverage": {
       "kick": 4,
-      "snare": 3,
+      "snare": 4,
       "hihat": 4,
       "clap": 4,
       "crash": 4,
@@ -125,7 +127,7 @@
       "rim": 4,
       "bell": 4
     },
-    "completeSoundkits": 3,
-    "averageCompleteness": 96.875
+    "completeSoundkits": 4,
+    "averageCompleteness": 100
   }
 }
