@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drum Machine PRO - Soundkit Catalog by Casa24</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Meta tags -->
+  <meta name="description" content="Professional soundkit library for Drum Machine PRO. High-quality drum samples organized and ready for Web Audio API.">
+  <meta name="author" content="Casa24 Records">
+  <meta property="og:title" content="Drum Machine PRO - Soundkit Catalog">
+  <meta property="og:description" content="Free professional soundkit library by Casa24 Records">
+  <meta property="og:type" content="website">
+</head>
+<body>
+  <!-- Decorative elements -->
+  <div class="vinyl-decoration"></div>
+  <div class="cassette-decoration"></div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="main-title">
+          <span class="title-accent">🎵</span> Drum Machine PRO
+        </h1>
+        <p class="subtitle">Free Soundkit Library by Casa24 Records</p>
+        <p class="tagline">"Building bridges, not walls, in the world of music"</p>
+        <div class="last-updated" id="last-updated">
+          <span class="update-label">Last Updated:</span>
+          <span class="update-date" id="update-date">Loading...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-section">
+      <div class="nav-links">
+        <a href="#catalog" class="nav-link active">Soundkit Catalog</a>
+        <a href="demos/" class="nav-link">Interactive Demo</a>
+        <a href="https://github.com/casa24records/Drum-Machine-PRO" target="_blank" rel="noopener noreferrer" class="nav-link">
+          <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </nav>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+      <div class="stats-grid" id="stats-grid">
+        <!-- Stats will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <!-- Controls Section -->
+    <section class="controls-section">
+      <div class="controls-wrapper">
+        <div class="control-group">
+          <label for="search-input" class="control-label">Search:</label>
+          <input 
+            type="text" 
+            id="search-input" 
+            class="search-input" 
+            placeholder="Search soundkits..."
+            autocomplete="off"
+          >
+        </div>
+        
+        <div class="control-group">
+          <label for="sort-select" class="control-label">Sort by:</label>
+          <select id="sort-select" class="sort-select">
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="completeness-desc">Completeness (High-Low)</option>
+            <option value="completeness-asc">Completeness (Low-High)</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label for="filter-select" class="control-label">Filter:</label>
+          <select id="filter-select" class="filter-select">
+            <option value="all">All Soundkits</option>
+            <option value="complete">Complete Only (100%)</option>
+            <option value="incomplete">Incomplete Only</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soundkit Catalog -->
+    <main class="catalog-section">
+      <div class="catalog-header">
+        <h2 class="section-title">Available Soundkits</h2>
+        <div class="catalog-count" id="catalog-count">
+          Showing <span id="visible-count">0</span> of <span id="total-count">0</span> soundkits
+        </div>
+      </div>
+      
+      <div class="soundkit-grid" id="soundkit-grid">
+        <!-- Soundkit cards will be dynamically inserted here -->
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          <p class="loading-text">Loading soundkits...</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Audio Player Modal -->
+    <div id="audio-modal" class="audio-modal" style="display: none;">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Soundkit Preview</h3>
+          <button class="modal-close" id="modal-close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="audio-controls" id="audio-controls">
+            <!-- Audio controls will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">About</h3>
+          <p class="footer-text">
+            Drum Machine PRO is a production-ready soundkit API that powers Casa24's music tools. 
+            Free for everyone, no strings attached.
+          </p>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="demos/">Try Demo</a></li>
+            <li><a href="https://github.com/casa24records/Drum-Machine-PRO#readme" target="_blank">Documentation</a></li>
+            <li><a href="https://github.com/casa24records/Drum-Machine-PRO/blob/main/LICENSE" target="_blank">License</a></li>
+            <li><a href="manifest.json" target="_blank">API Endpoint</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Usage</h3>
+          <div class="code-snippet">
+            <code>
+              import soundkitManager from 'https://casa24records.github.io/Drum-Machine-PRO/index.js';
+            </code>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Created with 💜 by <strong>Casa24 Records</strong> © 2025</p>
+        <p class="footer-motto">We Out Here</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/soundkit-catalog.js"></script>
+</body>
+</html>
