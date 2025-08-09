@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-07T22:59:23.629Z",
-  "totalSoundkits": 1,
+  "generated": "2025-08-09T17:43:52.947Z",
+  "totalSoundkits": 2,
   "instruments": [
     "kick",
     "snare",
@@ -14,6 +14,17 @@
   ],
   "baseUrl": "https://casa24records.github.io/Drum-Machine-PRO",
   "soundkits": [
+    {
+      "name": "CREAM",
+      "id": "cream",
+      "instruments": {
+        "bell": "bell/CREAM - bell.wav"
+      },
+      "completeness": 12.5,
+      "availableInstruments": [
+        "bell"
+      ]
+    },
     {
       "name": "firealarm",
       "id": "firealarm",
@@ -41,7 +52,7 @@
     }
   ],
   "statistics": {
-    "totalFiles": 8,
+    "totalFiles": 9,
     "instrumentCoverage": {
       "kick": 1,
       "snare": 1,
@@ -50,9 +61,9 @@
       "crash": 1,
       "open": 1,
       "rim": 1,
-      "bell": 1
+      "bell": 2
     },
     "completeSoundkits": 1,
-    "averageCompleteness": 100
+    "averageCompleteness": 56.25
   }
 }
