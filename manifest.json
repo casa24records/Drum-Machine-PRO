@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-08-09T18:39:15.761Z",
+  "generated": "2025-08-09T18:39:38.795Z",
   "totalSoundkits": 4,
   "instruments": [
     "kick",
@@ -49,10 +49,12 @@
         "clap": "clap/CREAM - clap.wav",
         "crash": "crash/CREAM - crash.wav",
         "open": "open/CREAM - open.wav",
-        "rim": "rim/CREAM - rim.wav"
+        "rim": "rim/CREAM - rim.wav",
+        "bell": "bell/CREAM - bell.wav"
       },
-      "completeness": 87.5,
+      "completeness": 100,
       "availableInstruments": [
+        "bell",
         "clap",
         "crash",
         "hihat",
@@ -114,7 +116,7 @@
     }
   ],
   "statistics": {
-    "totalFiles": 31,
+    "totalFiles": 32,
     "instrumentCoverage": {
       "kick": 4,
       "snare": 4,
@@ -123,9 +125,9 @@
       "crash": 4,
       "open": 4,
       "rim": 4,
-      "bell": 3
+      "bell": 4
     },
-    "completeSoundkits": 3,
-    "averageCompleteness": 96.875
+    "completeSoundkits": 4,
+    "averageCompleteness": 100
   }
 }
