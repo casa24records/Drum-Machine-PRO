@@ -122,10 +122,11 @@ Remember: **Take what you need, create what you love, but please leave this gard
 
 - **Live Demo**: [https://casa24records.github.io/Drum-Machine-PRO/demos/](https://casa24records.github.io/Drum-Machine-PRO/demos/)
 - **API Endpoint**: [https://casa24records.github.io/Drum-Machine-PRO/manifest.json](https://casa24records.github.io/Drum-Machine-PRO/manifest.json)
-- **Casa24 Website**: [Coming Soon]
+- **Casa24 Main Website**: [www.casa24records.com]
+- **Casa24 Info Website**: [www.casa24records.info]
 
 ---
 
-Made with ❤️ for music producers and web developers by Casa24 Records  
-*Building bridges, not walls, in the world of music*
+Made with ❤️ by Casa24 Records  
+
 
