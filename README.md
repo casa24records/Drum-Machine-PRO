@@ -118,9 +118,6 @@ Remember: **Take what you need, create what you love, but please leave this gard
 
 ---
 
-*"Music is meant to be shared, sounds are meant to be heard, and creativity should never be caged."*  
-**- Casa24 Records**
-
 ## 🔗 Links
 
 - **Live Demo**: [https://casa24records.github.io/Drum-Machine-PRO/demos/](https://casa24records.github.io/Drum-Machine-PRO/demos/)
@@ -131,3 +128,4 @@ Remember: **Take what you need, create what you love, but please leave this gard
 
 Made with ❤️ for music producers and web developers by Casa24 Records  
 *Building bridges, not walls, in the world of music*
+
